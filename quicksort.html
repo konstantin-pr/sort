@@ -1,0 +1,77 @@
+<!Doctype html>
+ <head>
+ <title>    Quick sort JD</title>
+ <meta charset="utf-8" />
+ </head>
+
+<script type="text/javascript"> 
+ 
+//если текущий элемент больше среднего элемента, возвращаем указатель на текущий элемент 
+//иначе возвращаем указатель на средний элемент
+var getGreaterOrCenter = function (array, p, center) { 
+    for (i = p, p = center; i <= center; i++){
+        //default p = center
+        if (array[i] >= array[center]) {
+            p = i;
+            return p;
+        }
+        //continue search 
+    } 
+    return p;
+}
+ 
+var getLessOrCenter = function (array, k, center) { 
+    for (i = array.length - 1, k = center; i >= center; i--) {
+        //default p = center
+        if (array[i] <= array[center]) {
+            //пометить указатель на замену
+            k = i; 
+            return k;
+        }
+        //continue search 
+    } 
+    return k;
+}
+
+//Меняет местами элементы в массиве
+var swap = function (array, firstPointer, secondPointer) {
+    var elem = array[firstPointer];
+    array[firstPointer] = array[secondPointer];
+    array[secondPointer] = elem;
+    return array;
+} 
+
+function sortArray() { 
+    var array  = [2,7,6,4,5,3,9,8,1];
+    console.log('input array', array);
+    var p = 0;
+    var k = array.length - 1;
+    var center = Math.round(array.length / 2);
+    var i = 0;
+    while (p != k) {
+        p = getGreaterOrCenter(array, p, center);
+        k = getLessOrCenter(array, k, center);
+        console.log('p = ', p);
+        console.log('k = ', k);
+        
+        //меняем элементы местами 
+        swap(array, p, k); 
+        console.log('current Array:' , array);
+        i++; 
+    }
+
+//если и правая и левая часть указывает на центр меняем местами
+swap(array, p, k); 
+console.log(' last :=: p ' , p,' k ', k, ' array ', array) ;
+//Поделить массив на 2 половины
+}
+
+
+</script>
+<body>
+<h1> Результат сортировки в Консоли </h1>
+<script>
+    sortArray();
+</script>
+</body>
+</html>
