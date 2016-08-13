@@ -45,27 +45,32 @@ function sortArray() {
     var array  = [2,7,6,4,5,3,9,8,1];
     console.log('input array', array);
     var p = 0;
-    var k = array.length - 1;
-    var center = Math.round(array.length / 2);
-    var i = 0;
-    while (p != k) {
+    var k = array.length - 1; 
+    var i = 0; 
+    //если и правая и левая часть указывает на центр меняем местами
+    sortSubArray(array, p, k);  
+
+    console.log(' last :=: p ' , p,' k ', k, ' array ', array) ;
+    //Поделить массив на 2 половины
+}
+
+function sortSubArray(array, p, k) { 
+      console.log('sub Array:' , array);  
+        var center = Math.round(k / 2);
         p = getGreaterOrCenter(array, p, center);
         k = getLessOrCenter(array, k, center);
         console.log('p = ', p);
-        console.log('k = ', k);
+        console.log('k = ', k); 
+        //меняем элементы местами
+        //возвращаем array, p, k  
+        if (p != k){
+            swap(array, p, k);
+           
+            results = sortSubArray(array, p, k);
+        } 
+        return array;
         
-        //меняем элементы местами 
-        swap(array, p, k); 
-        console.log('current Array:' , array);
-        i++; 
-    }
-
-//если и правая и левая часть указывает на центр меняем местами
-swap(array, p, k); 
-console.log(' last :=: p ' , p,' k ', k, ' array ', array) ;
-//Поделить массив на 2 половины
 }
-
 
 </script>
 <body>
